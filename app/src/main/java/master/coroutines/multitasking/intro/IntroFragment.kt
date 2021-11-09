@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import master.coroutines.multitasking.databinding.FragmentIntroBinding
@@ -41,12 +43,19 @@ class IntroFragment : Fragment() {
 
 
 
+        binding.btnCount.setOnClickListener {
+            CoroutineScope(Main).launch {
+                binding.mainTxt.text = UserDataManager2().getTotalUserCount().toString()
+            }
+        }
+
     }
 
-    private fun switchCoroutineBetweenThreads(){
+
+    private fun switchCoroutineBetweenThreads() {
 
         binding.btnCount.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(IO).launch {
                 // background thread
                 downloadUserData()
             }

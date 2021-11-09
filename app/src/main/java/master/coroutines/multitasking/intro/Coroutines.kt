@@ -50,7 +50,6 @@ package master.coroutines.multitasking.intro
 =======================================================================
  - Structured Concurrency!
  avoid leaks and manage them productively  {Xx unstructured manner Xx}
-
 ========================================================================
       example
       CoroutineScope(Dispatchers.IO).launch {

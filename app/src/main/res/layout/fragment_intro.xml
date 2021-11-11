@@ -5,19 +5,9 @@
     android:padding="@dimen/_20sdp"
     tools:context=".intro.IntroFragment">
 
-    <TextView
-        android:id="@+id/main_txt"
-        style="@style/subText_"
-        android:layout_centerInParent="true"
-        android:layout_margin="@dimen/_5sdp" />
 
-    <Button
-        android:id="@+id/btn_count"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/main_txt"
-        android:layout_centerInParent="true"
-        android:padding="@dimen/_5sdp"
-        android:text="@string/nav_app_bar_navigate_up_description"
-        android:textColor="@color/white" />
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        style="@style/progress_"
+        android:visibility="invisible" />
 </RelativeLayout>

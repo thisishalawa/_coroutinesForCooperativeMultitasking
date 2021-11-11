@@ -12,7 +12,7 @@
         tools:ignore="AllowBackup">
 
         <activity
-            android:name="master.coroutines.multitasking.MainActivity"
+            android:name="master.coroutines.multitasking.main.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>

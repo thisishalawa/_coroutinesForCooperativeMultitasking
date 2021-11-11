@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
@@ -43,32 +44,44 @@ class IntroFragment : Fragment() {
 
 
 
-        binding.btnCount.setOnClickListener {
-            CoroutineScope(Main).launch {
-                binding.mainTxt.text = UserDataManager2().getTotalUserCount().toString()
-            }
-        }
-
     }
 
+    private fun lifecycleScopeStates(){
+        lifecycleScope.launch {
+            // coroutine
+        }
+
+        lifecycleScope.launchWhenCreated {
+            // long time operation should happen only once during
+            // the lifeCycle of the activity
+        }
+
+        lifecycleScope.launchWhenStarted {
+            // coroutine will launch when activity or fragment start
+            // like transaction ..
+        }
+
+        lifecycleScope.launchWhenResumed {
+            // state which the app interacts with the user
+        }
+    }
 
     private fun switchCoroutineBetweenThreads() {
-
-        binding.btnCount.setOnClickListener {
-            CoroutineScope(IO).launch {
-                // background thread
-                downloadUserData()
-            }
-        }
+//        binding.btnCount.setOnClickListener {
+//            CoroutineScope(IO).launch {
+//                // background thread
+//                downloadUserData()
+//            }
+//        }
     }
 
     private suspend fun downloadUserData() {
-        for (i in 1..2000) {
-            withContext(Dispatchers.Main) {
-                // main thread
-                binding.mainTxt.text =
-                    "Downloading user in $i in ${Thread.currentThread().name}"
-            }
-        }
+//        for (i in 1..2000) {
+//            withContext(Dispatchers.Main) {
+//                // main thread
+//                binding.mainTxt.text =
+//                    "Downloading user in $i in ${Thread.currentThread().name}"
+//            }
+//        }
     }
 }

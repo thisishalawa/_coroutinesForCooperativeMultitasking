@@ -1,18 +1,26 @@
-package master.coroutines.multitasking
+package master.coroutines.multitasking.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import master.coroutines.multitasking.R
 import master.coroutines.multitasking.databinding.ActivityMainBinding
+import master.coroutines.multitasking.intro.TAG
+import master.coroutines.multitasking.main.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
     // binding
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
+    // viewModel
+    private lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +37,20 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navController)
 
 
+    }
+
+    private fun initViewModel() {
+        // init ViewModel
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        viewModel.getUserData()
+        // observe liveData
+        viewModel.users.observe(this, {
+            Log.d(TAG, "users observe : $it")
+        })
+        // or user the new liveData builder
+        viewModel.newUsers.observe(this, {
+            Log.d(TAG, "users observe : $it")
+        })
     }
 }
 /*
